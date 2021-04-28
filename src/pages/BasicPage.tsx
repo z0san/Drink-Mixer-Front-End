@@ -1,15 +1,15 @@
 import { Button, Stack, Flex, Spacer, Text, Box } from "@chakra-ui/react";
 
 const BasicPage = (props: { setCurrentPage: (newPage: string) => void }) => {
-	const sendMotorCommand = (motor_num: number, action: string) => {
-		console.log("sending " + action + " for motor " + String(motor_num));
+	const sendMotorCommand = (motor_num: number) => {
+		console.log("sending for motor " + String(motor_num));
 		const request_options = {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				type: "motor",
 				motor: motor_num,
-				action: action,
+				time: 30000,
 			}),
 		};
 		fetch("http://10.0.0.160:3000", request_options).then((response) =>
@@ -31,27 +31,15 @@ const BasicPage = (props: { setCurrentPage: (newPage: string) => void }) => {
 					borderRadius='30px'
 					key={number}>
 					<Text>Drink {number + 1}</Text>
-					<Flex>
-						<Button
-							className='drink-button'
-							colorScheme='blue'
-							size='lg'
-							height='60px'
-							width='40%'
-							onClick={() => sendMotorCommand(number, "on")}>
-							Start
-						</Button>
-						<Spacer />
-						<Button
-							className='drink-button'
-							colorScheme='blue'
-							size='lg'
-							height='60px'
-							width='40%'
-							onClick={() => sendMotorCommand(number, "off")}>
-							Stop
-						</Button>
-					</Flex>
+					<Button
+						className='drink-button'
+						colorScheme='blue'
+						size='lg'
+						height='60px'
+						width='40%'
+						onClick={() => sendMotorCommand(number)}>
+						Pour 30sec
+					</Button>
 				</Box>
 			))}
 			<Button

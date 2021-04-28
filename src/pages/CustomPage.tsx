@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Button, Stack, Center, Text, Box } from "@chakra-ui/react";
+import {
+	Button,
+	Stack,
+	Center,
+	Text,
+	Box,
+	Flex,
+	Spacer,
+} from "@chakra-ui/react";
 
 type Drink = {
 	id: number;
 	name: string;
-	motor0: number;
-	motor1: number;
-	motor2: number;
-	motor3: number;
-	motor4: number;
-	motor5: number;
+	ratios: [];
 };
 
 const CustomPage = (props: { setCurrentPage: (newPage: string) => void }) => {
@@ -48,15 +51,27 @@ const CustomPage = (props: { setCurrentPage: (newPage: string) => void }) => {
 							width='100%'
 							key={drink.id}>
 							<Text>{drink.name}</Text>
-							<Button
-								className='drink-button'
-								colorScheme='blue'
-								size='lg'
-								height='60px'
-								width='40%'
-								onClick={() => sendDrinkCommand(drink.id)}>
-								Pour
-							</Button>
+							<Flex>
+								<Button
+									className='drink-button'
+									colorScheme='blue'
+									size='lg'
+									height='60px'
+									width='40%'
+									onClick={() => sendDrinkCommand(drink.id)}>
+									Pour Big
+								</Button>
+								<Spacer />
+								<Button
+									className='drink-button'
+									colorScheme='blue'
+									size='lg'
+									height='60px'
+									width='40%'
+									onClick={() => sendDrinkCommand(drink.id)}>
+									Pour Small
+								</Button>
+							</Flex>
 						</Box>
 					))}
 					<Button
