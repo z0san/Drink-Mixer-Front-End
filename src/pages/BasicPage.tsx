@@ -1,4 +1,4 @@
-import { Button, Stack, Flex, Spacer, Text, Box } from "@chakra-ui/react";
+import { Button, Stack, Text, Box } from "@chakra-ui/react";
 
 const BasicPage = (props: { setCurrentPage: (newPage: string) => void }) => {
 	const sendMotorCommand = (motor_num: number) => {

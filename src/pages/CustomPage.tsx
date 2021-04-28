@@ -18,8 +18,20 @@ type Drink = {
 const CustomPage = (props: { setCurrentPage: (newPage: string) => void }) => {
 	const [drinks, setDrinks] = useState([]);
 
-	const sendDrinkCommand = (drink: number) => {
-		alert("pouring drink " + String(drink));
+	const sendDrinkCommand = (drink: number, size: string) => {
+		const request_options = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				type: "custom",
+				drink,
+				size,
+			}),
+		};
+		fetch("http://10.0.0.160:3000", request_options).then((response) =>
+			// console.log(response.json())
+			console.log("test")
+		);
 	};
 
 	useEffect(() => {
@@ -58,7 +70,7 @@ const CustomPage = (props: { setCurrentPage: (newPage: string) => void }) => {
 									size='lg'
 									height='60px'
 									width='40%'
-									onClick={() => sendDrinkCommand(drink.id)}>
+									onClick={() => sendDrinkCommand(drink.id, "big")}>
 									Pour Big
 								</Button>
 								<Spacer />
@@ -68,7 +80,7 @@ const CustomPage = (props: { setCurrentPage: (newPage: string) => void }) => {
 									size='lg'
 									height='60px'
 									width='40%'
-									onClick={() => sendDrinkCommand(drink.id)}>
+									onClick={() => sendDrinkCommand(drink.id, "small")}>
 									Pour Small
 								</Button>
 							</Flex>
